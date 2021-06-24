@@ -1,7 +1,6 @@
 package datastructure;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * ArrayList 集合
@@ -73,5 +72,57 @@ public class JavaArrayList {
         System.out.println(integerList.get(1));
         System.out.println(integerList.get(2));
         System.out.println(integerList.get(3));
+
+        // 排序 Collections.sort();
+        Collections.sort(integerList);
+        System.out.println(integerList); // 默认升序排列
+        Collections.sort(integerList, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return -1;
+            }
+        });
+        Collections.sort(integerList, (o1, o2) -> o1 - o2); // o1 - o2 升序排列
+        System.out.println(integerList);
+        Collections.sort(integerList, ((o1, o2) -> o2 - o1)); // o2 - o1 降序排列
+        System.out.println(integerList);
+
+        integerList.sort(((o1, o2) -> o1 - o2)); // 升序排列
+        System.out.println(integerList);
+        integerList.sort(((o1, o2) -> o2 - o1)); // 降序排列
+        System.out.println(integerList);
+
+
+        // remove(E e) 只会删除e一个元素，List里面有重复的元素(多个e元素)也只会删除一个元素
+        // removeAll(Collection C) 会将C中所有的元素都删除，包括重复的元素，比如总集合中有5个a，C中有2个a，执行removeAll后，一个a都没有了，都被删除了
+        List<String> removeOneObjectList = new ArrayList<>();
+        removeOneObjectList.add("a");
+        removeOneObjectList.add("a");
+        removeOneObjectList.add("a");
+        removeOneObjectList.add("b");
+        removeOneObjectList.add("a");
+        removeOneObjectList.add("c");
+        removeOneObjectList.add("a");
+        System.out.println(removeOneObjectList);
+        removeOneObjectList.remove("a");
+        System.out.println(removeOneObjectList);
+
+        List<String> removeListObjectList = new ArrayList<>(); // 总集合
+        removeListObjectList.add("a");
+        removeListObjectList.add("a");
+        removeListObjectList.add("a");
+        removeListObjectList.add("a");
+        removeListObjectList.add("a");
+        removeListObjectList.add("b");
+        removeListObjectList.add("c");
+        System.out.println("removeListObjectList =>:" + removeListObjectList);
+
+        List<String> removeList = new ArrayList<>(); // 待删除集合
+        removeList.add("a");
+        removeList.add("a");
+        System.out.println("removeList =>:" + removeList);
+        removeListObjectList.removeAll(removeList);
+        System.out.println("removeListObjectList removeAll removeList =>:" + removeListObjectList.toString());
+
     }
 }
